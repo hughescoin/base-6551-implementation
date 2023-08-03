@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
 import "./interfaces/IERC6551Account.sol"; 
 import "./lib/Bytecode.sol";
 
-contract MyNFTAccount is IERC165, IERC1271, IERC6551Account {
+contract ERC6551Account is IERC165, IERC1271, IERC6551Account {
     receive() external payable {}
 
     function executeCall(
@@ -31,11 +31,7 @@ contract MyNFTAccount is IERC165, IERC1271, IERC6551Account {
     function token()
         external
         view
-        returns (
-            uint256 chainId,
-            address tokenContract,
-            uint256 tokenId
-        )
+        returns (uint256 chainId, address tokenContract, uint256 tokenId)
     {
         uint256 length = address(this).code.length;
         return
@@ -58,11 +54,10 @@ contract MyNFTAccount is IERC165, IERC1271, IERC6551Account {
             interfaceId == type(IERC6551Account).interfaceId);
     }
 
-    function isValidSignature(bytes32 hash, bytes memory signature)
-        external
-        view
-        returns (bytes4 magicValue)
-    {
+    function isValidSignature(
+        bytes32 hash,
+        bytes memory signature
+    ) external view returns (bytes4 magicValue) {
         bool isValid = SignatureChecker.isValidSignatureNow(
             owner(),
             hash,
@@ -74,5 +69,13 @@ contract MyNFTAccount is IERC165, IERC1271, IERC6551Account {
         }
 
         return "";
+    }
+
+    function nonce() external view override returns (uint256) {}
+
+    function send(address payable to, uint256 amount) external payable{
+        require(msg.sender == owner(), "Not token owner");
+        require(address(this).balance >= amount, "Insufficient funds");
+        to.transfer(amount);
     }
 }
