@@ -7,7 +7,7 @@ async function deploy() {
   const provider = new hre.ethers.JsonRpcProvider('http://127.0.0.1:8545/');
   const signer = new hre.ethers.Wallet(process.env.WALLET_KEY, provider);
 
-  const ERC721Contract = await hre.ethers.deployContract('FocusFoxes');
+  const ERC721Contract = await hre.ethers.deployContract('Token');
   await ERC721Contract.waitForDeployment();
   const ERC721ContractAddress = ERC721Contract.target;
   console.log(`ERC-721 Contract deployed at: ${ERC721ContractAddress}`);
@@ -21,7 +21,7 @@ async function deploy() {
   );
 
   console.log('Minting NFT...');
-  await ERC721Contract.createSupply(wallet2);
+  await ERC721Contract.mint(wallet2);
   const tokenId = Number(await ERC721Contract.getTokenIds()) - 1;
   const owner = await ERC721Contract.ownerOf(tokenId);
   console.log(`TokenId ${tokenId} is owned by address:  ${owner}`);
