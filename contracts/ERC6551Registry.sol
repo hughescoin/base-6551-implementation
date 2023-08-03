@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+
+
 pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/utils/Create2.sol";
@@ -5,7 +8,9 @@ import "./interfaces/IERC6551Registry.sol";
 
 contract ERC6551Registry is IERC6551Registry {
     error InitializationFailed();
+    //emit event
 
+    
     function createAccount(
         address implementation,
         uint256 chainId,

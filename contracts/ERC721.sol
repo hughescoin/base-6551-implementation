@@ -7,18 +7,22 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 
 
-contract FocusFoxes is ERC721 {
-    using Counters for Counters.Counter; //explain this
+contract Token is ERC721 {
+    using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds;
 
     constructor() ERC721("FocusedFoxes","BFF") {}
 
 
-    function createSupply(address friend)public returns(uint256){
+    function mint(address to)public returns(uint256){
         uint256 newTokenId = _tokenIds.current();
-        _safeMint(friend, newTokenId);
+        _safeMint(to, newTokenId);
         _tokenIds.increment();
         
         return newTokenId;
+    }
+
+        function getTokenIds() public view returns (uint256) {
+        return _tokenIds.current();
     }
 }
