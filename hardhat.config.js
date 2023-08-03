@@ -17,6 +17,7 @@ module.exports = {
     'base-goerli': {
       url: 'https://goerli.base.org',
       accounts: [process.env.WALLET_KEY],
+      chainId: 84531,
     },
     // for local dev environment
     'base-local': {
