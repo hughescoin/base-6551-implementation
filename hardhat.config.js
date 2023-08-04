@@ -11,7 +11,7 @@ module.exports = {
     'base-mainnet': {
       url: 'https://developer-access-mainnet.base.org',
       accounts: [process.env.WALLET_KEY, process.env.FRIEND_KEY],
-      chainId: 84531,
+      chainId: 8453,
     },
     // for testnet
     'base-goerli': {
