@@ -129,7 +129,7 @@ describe('Token bound account access control', () => {
   let tokenId;
   beforeEach(async () => {
     signer = await ethers.provider.getSigner(0);
-    receipient = process.env.FRIEND;
+    receipient = process.env.WALLET2_ADDR;
     chainId = (await hre.ethers.provider.getNetwork()).chainId;
     nftContract = await hre.ethers.deployContract('Token');
     registryContract = await hre.ethers.deployContract('ERC6551Registry');
