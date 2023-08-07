@@ -1,131 +1,75 @@
 # Create an NFT with a Token Bound Account
 
-- Implements ERC 721
-- Implements ERC 6551
-- Has an image hosted on IPFS
+This guide demonstrates how to create and interact with three smart contracts:
 
-## Tools used
+- An ERC721 smart contract that serves as our NFT.
+- A registry contract that deploys another smart contract.
+- A smart contract wallet (aka Token Bound Account) that will be owned by the NFT holder.
 
-- Hardhat
-- Node.js
-- OpenZeppelin
+## Tools
 
-## Setup
+We will use a few tools to write and deploy our smart contracts:
 
-1. Create a folder to house your project then open that directory
-   `mkdir base-nft-project`
-   `cd base-nft-project`
-2. Initiate a node project + install hardhat
-   `npm init` - initializes a npm project
-   `npm isntall --save-dev harhdaht` - install hardhat
-   `npx hardhat` - create project
-   Select "create empty hardhat.config.js"
-3. Install hardhat toolbox
-   The `@nomicfoundation/hardhat-toolbox` plugin bundles all the commonly used packages and Hardhat plugins we recommend to start developing with Hardhat. It allows us to use Ethers to interact with the blockchain.
-   `npm install --save-dev @nomicfoundation/hardhat-toolbox`
-4. install dotenv to store environment variables that contain mnemonic, private keys, and other sensistive information.
-   `npm install --save-dev dotenv`
-5. create a .env file in the root (`nft-base-project/`) folder:
+- [Hardhat](https://hardhat.org/): Helps deploy and interact with smart contracts.
+- [Node.js](https://nodejs.org/en): Developer environment.
+- [OpenZeppelin](https://www.openzeppelin.com/contracts): An open library for building secure smart contracts.
+- [Coinbase Wallet](https://www.coinbase.com/wallet/): Non-custodial wallet for creating accounts and interacting with the blockchain.
+
+## Environment Setup
+
+1. Clone this repo.
+2. Change into the directory using `cd erc-6551-implementation`.
+3. Initiate a node project and install hardhat:
+   ```bash
+   npm install --save-dev hardhat
+   ```
+4. Create a .env file in the root (erc-6551-implementation/) folder:
    `touch .env`
-6. Install OpenZeppelin Contracts API
-   `npm install @openzeppelin/contracts`
+5. Add the following code to your .env file:
+   ```
+   WALLET_KEY=<Private Key of an account>
+   WALLET2_ADDR=<Address of an additional wallet>
+   WALLET2_KEY=<Private key of an additional account>
+   ```
 
-### Configure the hardhat project to work with Base.
+## Wallet setup
 
-    require('@nomicfoundation/hardhat-toolbox');
-    require('dotenv').config();
-    /** @type import('hardhat/config').HardhatUserConfig */
+Assuming you have set up your wallet (and safely stored away your seed phrase) and have some funds (testnet or mainnet), let's obtain the addresses and private keys needed for the demo.
 
-    module.exports = {
+### Enable Testnets
 
-    solidity: {
-    version:  '0.8.19',
-    },
-    networks: {
-    // for mainnet
-    'base-mainnet': {
-    url:  'https://developer-access-mainnet.base.org',
-    accounts: [process.env.WALLET_KEY],
-    },
-    // for testnet
-    'base-goerli': {
-    url:  'https://goerli.base.org',
-    accounts: [process.env.WALLET_KEY],
-    },
-    // for local dev environment
-    'base-local': {
-    url:  'http://localhost:8545',
-    accounts: [process.env.WALLET_KEY],
-    },
-    },
-    defaultNetwork:  'base-local',
-    };
+1. Click on the Settings tab.
+2. Select Developer Settings.
+3. Toggle "Testnets" on.
 
-## Store Wallet Private Key as env variables
+### Switch Wallets + Copy Address
 
-This tutorial assumes that you already have a crypto wallet and are familiar with the basics of sending/receiving crypto and understand what a private key and seed phrase is.
+1. From the assets tab, click on the current address/account.
+2. Select another address.
 
-If you do not have a wallet and want to follow along, download a wallet from [Coinbase Wallet (Preferred)](https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad?hl=en)
-or [MetaMask](https://metamask.io/download/).
+_Note: Each account will need funds in order to deploy contracts and interact with Base._
 
-### Copy the private key
+### Copy Private Key
 
-1. Open the Coinbase Wallet Extension:
-2. Settings
-3. Developer Settings
-4. Show private key
-5. Enter wallet password (not your seed phrase)
-6. Copy private key to your clipboard
+_Do not share this with anyone._
 
-### Store Private Key to `.env` file
+1. Click on the Settings tab.
+2. Select Developer Settings.
+3. Click on Show Private Key.
+4. Enter password and check the disclaimer.
 
-`WALLET_KEY=<YOUR_PRIVATE_KEY>`
+### Request Testnet Funds
 
-Awesome! We've now set up our project and we are ready to start writing out smart contracts that will create our NFTs.
+5. Click on the Settings tab.
+6. Select Networks.
+7. Choose Testnets.
+8. Click on the Water icon.
+9. Request testnet funds.
 
-## Contract Development
+## Run Scripts
 
-We will be creating and deploying three smart contracts:
+1. `npx hardhat run scripts/01_deploy_contracts.js` will deploy, mint, and assign an NFT to the `WALLET2_ADDR`.
+2. `npx hardhat run scripts/02_create_account.js` will have the Registry contract create the token bound account and compute its address.
+3. `npx hardhat run scripts/03_account_interaction.js` will send funds from `WALLET_KEY` to the token bound account and transfer ownership of the NFT from `WALLET2_ADDR` to `WALLET_KEY`.
 
-1. Contract 1: The NFT itself. This will be an ERC-721 token that will own the Token Bound Account
-2. Contract 2: The Registry contract. This is the smart contract responsible for create an wallet this is owned by out NFT and the NFT owner
-3. Contract 3: The Smart Wallet (account)
-
-### Create the NFT Contract (ERC6551)
-
-Create NFT contract 721
-Create the TBA - 6551
-Create Registry
-
-### Create an ERC-721 (NFT)
-
-navigate to the contracts folder `base-nft-project/contracts`
-create a new file called `MyERC721.sol`
-
-`base-nft-project/contracts/MyERC721.sol`:
-
-    // SPDX-License-Identifier: MIT
-    import {ERC721} from  "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-    import  "@openzeppelin/contracts/utils/Counters.sol";
-
-    pragma  solidity ^0.8.19;
-    contract  FocusFoxes  is  ERC721 {
-        using  Counters  for  Counters.Counter; //explain this
-        Counters.Counter  private _tokenIds;
-        constructor() ERC721("FocusedFoxes","BFF") {}
-        function  createSupply(address  friend)public  returns(uint256){
-
-        uint256 newTokenId = _tokenIds.current();
-        _safeMint(friend, newTokenId);
-        _tokenIds.increment();
-
-        return newTokenId;
-      }
-    }
-
-### Deploy NFT
-
-Let's now deploy our NFT contract by
-
-1. Create a new file in the scripts folder `base-nft-project/scripts/` called `01_deploy_Nft.js`
-2. Edit the file to contain the following lines of code
+Congrats!
