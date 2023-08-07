@@ -55,7 +55,7 @@ _Do not share this with anyone._
 2. Change into the directory using `cd erc-6551-implementation`.
 3. Initiate a node project and install hardhat:
    ```bash
-   npm install --save-dev hardhat
+   npm install
    ```
 4. Create a .env file in the root (erc-6551-implementation/) folder:
    `touch .env`
