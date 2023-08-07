@@ -2,9 +2,9 @@
 
 This guide demonstrates how to create and interact with three smart contracts:
 
-- An ERC721 smart contract that serves as our NFT.
-- A registry contract that deploys another smart contract.
-- A smart contract wallet (aka Token Bound Account) that will be owned by the NFT holder.
+- An [ERC721](https://docs.openzeppelin.com/contracts/4.x/erc721) smart contract that serves as our NFT.
+- A [registry contract](https://eips.ethereum.org/EIPS/eip-6551) that deploys another smart contract.
+- A smart contract wallet (a.k.a. Token Bound Account) that will be owned by the NFT holder.
 
 ## Tools
 
@@ -38,9 +38,9 @@ Assuming you have set up your wallet (and safely stored away your seed phrase) a
 
 ### Enable Testnets
 
-1. Click on the Settings tab.
-2. Select Developer Settings.
-3. Toggle "Testnets" on.
+1. Click on the Settings tab
+2. Select "Developer Settings"
+3. Toggle "Testnets" on
 
 ### Switch Wallets + Copy Address
 
@@ -53,18 +53,18 @@ _Note: Each account will need funds in order to deploy contracts and interact wi
 
 _Do not share this with anyone._
 
-1. Click on the Settings tab.
-2. Select Developer Settings.
-3. Click on Show Private Key.
-4. Enter password and check the disclaimer.
+1. Click on the Settings tab
+2. Select "Developer Settings"
+3. Click on "Show private key"
+4. Enter password and select the disclaimer ✅
 
 ### Request Testnet Funds
 
-5. Click on the Settings tab.
-6. Select Networks.
-7. Choose Testnets.
-8. Click on the Water icon.
-9. Request testnet funds.
+5. Click on the Settings tab
+6. Select "Networks"
+7. Select "Testnets"
+8. Click on the water (💧) icon
+9. Request testnet funds
 
 ## Run Scripts
 
