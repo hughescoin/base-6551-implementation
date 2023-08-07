@@ -15,23 +15,6 @@ We will use a few tools to write and deploy our smart contracts:
 - [OpenZeppelin](https://www.openzeppelin.com/contracts): An open library for building secure smart contracts.
 - [Coinbase Wallet](https://www.coinbase.com/wallet/): Non-custodial wallet for creating accounts and interacting with the blockchain.
 
-## Environment Setup
-
-1. Clone this repo.
-2. Change into the directory using `cd erc-6551-implementation`.
-3. Initiate a node project and install hardhat:
-   ```bash
-   npm install --save-dev hardhat
-   ```
-4. Create a .env file in the root (erc-6551-implementation/) folder:
-   `touch .env`
-5. Add the following code to your .env file:
-   ```
-   WALLET_KEY=<Private Key of an account>
-   WALLET2_ADDR=<Address of an additional wallet>
-   WALLET2_KEY=<Private key of an additional account>
-   ```
-
 ## Wallet setup
 
 Assuming you have set up your wallet (and safely stored away your seed phrase) and have some funds (testnet or mainnet), let's obtain the addresses and private keys needed for the demo.
@@ -65,6 +48,23 @@ _Do not share this with anyone._
 7. Select "Testnets"
 8. Click on the water (💧) icon
 9. Request testnet funds
+
+## Environment Setup
+
+1. Clone this repo.
+2. Change into the directory using `cd erc-6551-implementation`.
+3. Initiate a node project and install hardhat:
+   ```bash
+   npm install --save-dev hardhat
+   ```
+4. Create a .env file in the root (erc-6551-implementation/) folder:
+   `touch .env`
+5. Add the following code to your .env file:
+   ```
+   WALLET_KEY=<Private Key of an account>
+   WALLET2_ADDR=<Address of an additional wallet>
+   WALLET2_KEY=<Private key of an additional account>
+   ```
 
 ## Run Scripts
 
