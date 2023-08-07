@@ -68,8 +68,8 @@ _Do not share this with anyone._
 
 ## Run Scripts
 
-1. `npx hardhat run scripts/01_deploy_contracts.js` will deploy, mint, and assign an NFT to the `WALLET2_ADDR`.
-2. `npx hardhat run scripts/02_create_account.js` will have the Registry contract create the token bound account and compute its address.
-3. `npx hardhat run scripts/03_account_interaction.js` will send funds from `WALLET_KEY` to the token bound account and transfer ownership of the NFT from `WALLET2_ADDR` to `WALLET_KEY`.
+1. `npx hardhat run scripts/01_deploy_contracts.js --network base-local` will deploy, mint, and assign an NFT to the `WALLET2_ADDR`.
+2. `npx hardhat run scripts/02_create_account.js --network base-local` will have the Registry contract create the token bound account and compute its address.
+3. `npx hardhat run scripts/03_account_interaction.js --network base-local` will send funds from `WALLET_KEY` to the token bound account and transfer ownership of the NFT from `WALLET2_ADDR` to `WALLET_KEY`.
 
 Congrats!
