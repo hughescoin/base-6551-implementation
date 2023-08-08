@@ -27,9 +27,11 @@ We will use a few tools to write and deploy our smart contracts:
 - [OpenZeppelin](https://www.openzeppelin.com/contracts): An open library for building secure smart contracts.
 - [Coinbase Wallet](https://www.coinbase.com/wallet/): Non-custodial wallet for creating accounts and interacting with the blockchain.
 
-## Wallet setup
+## Getting started
 
-Assuming you have set up your wallet (and safely stored away your seed phrase) and have some funds (testnet or mainnet), let's obtain the addresses and private keys needed for the demo.
+We will be deploying these smart contracts on the [Base](https://docs.base.org/) Goerli testnet allowing us to see transaction information on [BaseScan](https://goerli.basescan.org/).
+
+This means we will need to obtain testnet funds from a [faucet](https://coinbase.com/faucets) to deploy and interact with our smart contracts.
 
 ### Enable Testnets
 
@@ -44,46 +46,6 @@ Assuming you have set up your wallet (and safely stored away your seed phrase) a
 3. Toggle "Testnets" on
 
 ![Enable testnets](images/enable_testnet_toggle.png)
-
-### Switch Wallets + Copy Address
-
-1. From the assets tab, click on the current address/account
-
-![Assets tab](images/assets_tab.png)
-
-2. Select another wallet/account
-
-![Select another account](images/select_wallet.png)
-
-3. Copy the address of the newly selected wallet/account
-
-![Copy address](images/copy_address.png)
-
-_Note: Each account will need funds in order to deploy contracts and interact with Base._
-
-### Copy Private Key
-
-_Do not share this with anyone._
-
-1. Click on the Settings tab
-
-![Settings tab](images/enable_testnet.png)
-
-2. Select "Developer Settings"
-
-![Developer settings](images/enable_testnet_settings.png)
-
-3. Click on "Show private key"
-
-![Show private key](images/private_keys.png)
-
-4. Enter password
-
-![Enter password](images/private_keys_show1.png)
-
-5. Read disclaimer to copy address
-
-![accept terms](images/private_keys_copy2cb.png)
 
 ### Request Testnet Funds
 
@@ -124,7 +86,51 @@ _Do not share this with anyone._
    WALLET2_KEY=<Private key of an additional account>
    ```
 
-Be sure to replace the values of each variable using the address and private keys obtained from the Wallet Setup section.
+Be sure to replace the values of each variable using the address and private keys obtained from the Wallet setup section
+
+## Wallet Setup
+
+Assuming you have set up your wallet (and safely stored away your seed phrase) and have some funds (testnet or mainnet), let's obtain the addresses and private keys needed for the demo.
+
+### Switch Wallets + Copy Address
+
+1. From the assets tab, click on the current address/account
+
+![Assets tab](images/assets_tab.png)
+
+2. Select another wallet/account
+
+![Select another account](images/select_wallet.png)
+
+3. Copy the address of the newly selected wallet/account
+
+![Copy address](images/copy_address.png)
+
+_Note: Each account will need funds in order to deploy contracts and interact with Base._
+
+### Copy Private Key
+
+_Do not share this with anyone._
+
+1. Click on the Settings tab
+
+![Settings tab](images/enable_testnet.png)
+
+2. Select "Developer Settings"
+
+![Developer settings](images/enable_testnet_settings.png)
+
+3. Click on "Show private key"
+
+![Show private key](images/private_keys.png)
+
+4. Enter password
+
+![Enter password](images/private_keys_show1.png)
+
+5. Read disclaimer to copy address
+
+![accept terms](images/private_keys_copy2cb.png)
 
 ## Run Scripts
 
