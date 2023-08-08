@@ -1,10 +1,22 @@
+# Introduction
+
+[EIP-6551](https://eips.ethereum.org/EIPS/eip-6551) enhances the features of NFTs (ERC721 tokens) by giving each token its own smart contract account, also known as token-bound accounts (TBA). These smart contract accounts equip NFTs with the ability to operate like traditional blockchain wallets, allowing state changes and features such as holding ERC-20 tokens, other NFTs, and ether. Programmable accounts open up a myriad of use cases, limited only by the developer's imagination and the protocol's constraints.
+
+Use cases:
+
+- **Gaming** - A character, represented as an NFT, can possess its own inventory (like weapons, gold, etc.) using a smart wallet
+- **Investing** - Utilize NFTs and their smart contract accounts to organize assets and sell entire investment portfolios in a single transaction
+- **Social (DAOs)** - NFTs representing DAO membership can now maintain their own transaction history
+
+Importantly, EIP-6551 is backwards compatible and doesn't mandate custom logic within the NFT smart contract. This compatibility allows NFT projects that were created before the introduction of EIP-6551 to adopt smart contract accounts via a [permissionless registry](https://eips.ethereum.org/EIPS/eip-6551#registry).
+
 # Create an NFT with a Token Bound Account
 
 This guide demonstrates how to create and interact with three smart contracts:
 
-- An [ERC721](https://docs.openzeppelin.com/contracts/4.x/erc721) smart contract that serves as our NFT.
-- A [registry contract](https://eips.ethereum.org/EIPS/eip-6551) that deploys another smart contract.
-- A smart contract wallet (a.k.a. Token Bound Account) that will be owned by the NFT holder.
+1. An [ERC721](https://docs.openzeppelin.com/contracts/4.x/erc721) smart contract that serves as our NFT.
+2. A [registry contract](https://eips.ethereum.org/EIPS/eip-6551) that deploys smart contract account associated with a given ERC-721 and computes the token bound account address.
+3. A token bound account contract that can send and receive ether and other ERC-20 tokens.
 
 ## Tools
 
@@ -111,6 +123,8 @@ _Do not share this with anyone._
    WALLET2_ADDR=<Address of an additional wallet>
    WALLET2_KEY=<Private key of an additional account>
    ```
+
+Be sure to replace the values of each variable using the address and private keys obtained from the Wallet Setup section.
 
 ## Run Scripts
 
